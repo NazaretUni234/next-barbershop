@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-// import { getUser } from "./controllers/users";
-// import { GetUser } from "./types/users";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose"; // Importa jwtVerify de jose
 
 const protectedRoutes = [
   "/services",
@@ -14,7 +12,9 @@ const protectedRoutes = [
 
 const guestOnlyRoutes = ["/login", "/register"];
 
-const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || "default_secret"
+); // Convierte la clave secreta a un Uint8Array
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("tokenBarber")?.value; // Leer el token JWT de las cookies
@@ -38,9 +38,10 @@ export async function middleware(req: NextRequest) {
 
     try {
       // Decodificar el token para obtener el rol del usuario
-      const decodedToken = jwt.verify(token, JWT_SECRET) as { role: string };
+      const { payload } = await jwtVerify(token, JWT_SECRET); // Verifica el token usando jose
+      console.log("Decoded Token:", payload); // Verificar el contenido del token
 
-      if (decodedToken.role !== "admin") {
+      if (payload.role !== "admin") {
         url.pathname = "/home"; // Redirigir al home si no es admin
         return NextResponse.redirect(url);
       }

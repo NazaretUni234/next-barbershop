@@ -4,6 +4,8 @@ import mustacheImage from "../../css/uploads/mustache.png";
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { TypeManagement } from "@/types/system";
 // import "../../../public/js/all";
 
 export default function HeaderPages() {
@@ -212,18 +214,30 @@ export default function HeaderPages() {
     []
   );
 
+  const typeManagement: TypeManagement = useSelector(
+    (state: any) => state.system.managementType
+  );
+
   const managementBody = useMemo(
     () => (
       <div className="title title-1 text-center">
         <div className="title--heading">
-          <h1>Administra tus servicios</h1>
+          <h1>
+            {typeManagement === "services"
+              ? "Administrar servicios"
+              : "Administrar barberos"}
+          </h1>
         </div>
         <div className="clearfix" />
         <ol className="breadcrumb">
           <li>
             <Link href="/home">Inicio</Link>
           </li>
-          <li className="active">Administrar servicios</li>
+          <li className="active">
+            {typeManagement === "services"
+              ? "Administrar servicios"
+              : "Administrar barberos"}
+          </li>
         </ol>
         <div className="much">
           <Image
@@ -235,7 +249,7 @@ export default function HeaderPages() {
         </div>
       </div>
     ),
-    []
+    [typeManagement]
   );
 
   const bodyForPath = useMemo(() => {
