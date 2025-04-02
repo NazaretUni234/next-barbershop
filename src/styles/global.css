@@ -1,0 +1,34 @@
+@import url(../css/bootstrap.min.css);
+@import url(../css/colors.css);
+@import url(../css/versions.css);
+@import url(../css/responsive.css);
+@import url(../css/custom.css);
+/* @import url(../css/UiverseComponents/loadingScreen.css); */
+@import url(../css/UiverseComponents/loadingOperation.css);
+@import url(../css/style.css);
+/* 
+.titleHome {
+  font-size: large;
+  font-weight: bold;
+} */
+
+.tab-pane {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out;
+}
+
+.tab-pane.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ulRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px; /* Espacio entre elementos */
+  padding: 0;
+  list-style: none;
+}
