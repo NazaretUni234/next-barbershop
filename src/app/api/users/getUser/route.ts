@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const user = await authenticateJWT(req);
-    console.log("Usuario autenticado:", user);
 
     if (user instanceof NextResponse) {
       return user; // Si el middleware devuelve una respuesta de error

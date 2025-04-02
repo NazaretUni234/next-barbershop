@@ -2,9 +2,9 @@ import { MongoClient } from "mongodb";
 
 class ConnectionMongoDB {
   private static client: MongoClient | null = null;
-  // private static uri: string = "mongodb://localhost:27017";
-  private static uri: string =
-    "mongodb+srv://GenesisPriscete:priscete051@cluster0.jjeoklm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  private static uri: string = "mongodb://localhost:27017";
+  // private static uri: string =
+  //   "mongodb+srv://GenesisPriscete:priscete051@cluster0.jjeoklm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
   private constructor() {}
 
