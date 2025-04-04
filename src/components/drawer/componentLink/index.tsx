@@ -11,6 +11,11 @@ interface Props {
 export default function ComponentLink({ href, children }: Props) {
   const path = usePathname();
   const stylesActive = useMemo(() => {
+    if (href === "/home" && path === "/") {
+      return {
+        className: "active",
+      };
+    }
     if (path === href) {
       return {
         className: "active",
